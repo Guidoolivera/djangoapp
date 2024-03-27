@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center display-3 py-3">Tasks</h1>
+            <section>
+                {% for t in tasks %}
+                <a class="list-group-item" href="{% url 'task_detail' t.id %}">
+                    <fieldset class="border rounded-3 p-3 mt-3"">
+                        {% if t.important %}
+                        <legend class=" float-none w-auto px-1 mt">
+                        <h3 class="fw-bold text-success">{{ t.title }}</h3>
+                        </legend>
+                        {% else %}
+                        <legend class="float-none w-auto px-1">
+                            <h3 class="fw-bold">{{ t.title }}</h3>
+                        </legend>
+                        {% endif %}
+                        <p class="d-flex justify-content-between">by {{ t.user.username }}</p>
+                        <p>{{ t.datecompleted|date:'M j Y:i' }}</p>
+
+                    </fieldset>
+                </a>
+                {% endfor %}
+                </fieldset>
+            </section>
+        </div>
+    </div>
+</main>
+{% endblock %}
